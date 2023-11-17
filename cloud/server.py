@@ -8,20 +8,6 @@ import langroid_agents
 app = Flask(__name__)
 agent_manager = langroid_agents.AgentManager()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-# Create endpoint for langroid agent.
-@app.route('/langroid/agent', methods=['POST'])
-def create_agent():
-    # Get the JSON data from the request body
-    request_data = request.get_json()
-    name = request_data['agent_name']
-    agent_name = agent_manager.create_agent(name)
-
-    return jsonify({"message": f"Agent {agent_name} created successfully."}), 200
-
 # Example endpoint to get LLM response.
 @app.route('/langroid/agent/completions', methods=['POST'])
 def serve_completions():
